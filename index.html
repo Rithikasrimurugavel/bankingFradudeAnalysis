@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - BankSecure{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+
+{% block content %}
+
+    <!-- Statistics -->
+    <section class="stats">
+
+        <div class="card">
+            <p>👥 Total Customers</p>
+            <h2>{{ total_customers }}</h2>
+        </div>
+
+        <div class="card">
+            <p>🏦 Total Accounts</p>
+            <h2>{{ total_accounts }}</h2>
+        </div>
+
+        <div class="card">
+            <p>💳 Total Transactions</p>
+            <h2>{{ total_transactions }}</h2>
+        </div>
+
+        <div class="card">
+            <p>🚨 Fraud Alerts</p>
+            <h2>{{ total_fraud_alerts }}</h2>
+        </div>
+
+    </section>
+
+    <!-- Fraud Detection -->
+    <section class="fraud-alert">
+
+        <h2>⚠ Fraud Detection Status</h2>
+
+        <p>
+            Monitor suspicious banking transactions and identify
+            unusual activity using transaction analysis.
+        </p>
+
+        <p>
+            <strong>High Risk Alerts:</strong>
+            {{ high_risk_alerts }}
+        </p>
+
+        <form action="/analyze-fraud" method="POST">
+            <button type="submit" class="analyze-btn">
+                🔍 Analyze Transactions
+            </button>
+        </form>
+
+        <br>
+
+        <a href="/fraud-detection" class="view-all-btn">
+            View Fraud Alerts
+        </a>
+
+    </section>
+
+    <!-- Recent Transactions -->
+    <section class="transactions">
+
+        <div class="section-header">
+            <h2>Recent Transactions</h2>
+            <a href="/transactions" class="view-all-btn">View All</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Account Number</th>
+                    <th>Merchant</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if recent_transactions %}
+                    {% for transaction in recent_transactions %}
+                    <tr>
+                        <td>{{ transaction[0] }}</td>
+                        <td>{{ transaction[1] }}</td>
+                        <td>{{ transaction[2] }}</td>
+                        <td>₹{{ "%.2f"|format(transaction[3]) }}</td>
+                        <td>{{ transaction[4] }}</td>
+                        <td>{{ transaction[5] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">No transactions available yet.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </section>
+
+{% endblock %}
