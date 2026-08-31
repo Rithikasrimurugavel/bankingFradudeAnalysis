@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Customer - BankSecure{% endblock %}
+{% block eyebrow %}CUSTOMER MANAGEMENT{% endblock %}
+{% block heading %}Edit Customer{% endblock %}
+
+{% block content %}
+
+    <section class="form-section">
+
+        <h2>Update Customer Details</h2>
+
+        <form action="/update-customer/{{ customer[0] }}" method="POST">
+
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="firstname" value="{{ customer[1] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="lastname" value="{{ customer[2] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ customer[3] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" value="{{ customer[4] }}" required>
+            </div>
+
+            <button type="submit" class="save-btn">Update Customer</button>
+            <a href="/customers" class="view-all-btn">Cancel</a>
+
+        </form>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - BankSecure{% endblock %}
+{% block eyebrow %}BANKING FRAUD ANALYSIS{% endblock %}
+{% block heading %}Reports{% endblock %}
+
+{% block content %}
+
+    <!-- Report Statistics -->
+    <section class="stats">
+
+        <div class="card">
+            <p>Total Customers</p>
+            <h2>{{ total_customers }}</h2>
+        </div>
+
+        <div class="card">
+            <p>Total Accounts</p>
+            <h2>{{ total_accounts }}</h2>
+        </div>
+
+        <div class="card">
+            <p>Total Transactions</p>
+            <h2>{{ total_transactions }}</h2>
+        </div>
+
+        <div class="card">
+            <p>Total Fraud Alerts</p>
+            <h2>{{ total_fraud_alerts }}</h2>
+        </div>
+
+    </section>
+
+    <!-- Fraud Analysis Summary -->
+    <section class="fraud-alert">
+
+        <h2>🚨 Fraud Analysis Summary</h2>
+
+        <p><strong>High Risk Alerts:</strong> {{ high_risk }}</p>
+        <p><strong>Medium Risk Alerts:</strong> {{ medium_risk }}</p>
+
+    </section>
+
+    <!-- Fraud Risk Chart -->
+    <section class="transactions">
+
+        <h2>📊 Fraud Risk Summary</h2>
+
+        <div class="chart-container">
+            <canvas id="fraudChart"></canvas>
+        </div>
+
+    </section>
+
+    <!-- Recent Fraud Alerts -->
+    <section class="transactions">
+
+        <h2>🚨 Recent Fraud Alerts</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Alert ID</th>
+                    <th>Transaction ID</th>
+                    <th>Account Number</th>
+                    <th>Merchant</th>
+                    <th>Amount</th>
+                    <th>Fraud Reason</th>
+                    <th>Risk Level</th>
+                    <th>Detected At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if alerts %}
+                    {% for alert in alerts %}
+                    <tr>
+                        <td>{{ alert[0] }}</td>
+                        <td>{{ alert[1] }}</td>
+                        <td>{{ alert[2] }}</td>
+                        <td>{{ alert[3] }}</td>
+                        <td>₹{{ "%.2f"|format(alert[4]) }}</td>
+                        <td>{{ alert[5] }}</td>
+                        <td><span class="risk-badge risk-{{ alert[6]|lower }}">{{ alert[6] }}</span></td>
+                        <td>{{ alert[7] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8">No fraud alerts available yet.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </section>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const chartCanvas = document.getElementById("fraudChart");
+
+        if (chartCanvas) {
+            const ctx = chartCanvas.getContext("2d");
+
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["High Risk", "Medium Risk"],
+                    datasets: [{
+                        label: "Number of Fraud Alerts",
+                        data: [{{ high_risk | default(0) }}, {{ medium_risk | default(0) }}],
+                        backgroundColor: ["#dc2626", "#f59e0b"]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { precision: 0 }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

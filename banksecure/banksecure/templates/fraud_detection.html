@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Fraud Detection - BankSecure{% endblock %}
+{% block eyebrow %}FRAUD ANALYSIS{% endblock %}
+{% block heading %}Fraud Detection{% endblock %}
+
+{% block content %}
+
+    <!-- Fraud Analysis Card -->
+    <section class="fraud-alert">
+
+        <h2>🚨 Analyze Transactions</h2>
+
+        <p>
+            Click the button below to analyze all banking
+            transactions and identify suspicious activity.
+        </p>
+
+        <p><strong>Detection Rules:</strong></p>
+
+        <ul>
+            <li>Transactions above ₹50,000 → High Risk</li>
+            <li>5 or more transactions from the same account within 10 minutes → High Risk</li>
+            <li>Transactions between ₹20,000 and ₹50,000 → Medium Risk</li>
+        </ul>
+
+        <form action="/analyze-fraud" method="POST">
+            <button type="submit" class="analyze-btn">🔍 Analyze Transactions</button>
+        </form>
+
+    </section>
+
+    <!-- Fraud Alert List -->
+    <section class="transactions">
+
+        <h2>🚨 Fraud Alerts</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Alert ID</th>
+                    <th>Transaction ID</th>
+                    <th>Account Number</th>
+                    <th>Merchant</th>
+                    <th>Amount</th>
+                    <th>Fraud Reason</th>
+                    <th>Risk Level</th>
+                    <th>Detected At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if alerts %}
+                    {% for alert in alerts %}
+                    <tr>
+                        <td>{{ alert[0] }}</td>
+                        <td>{{ alert[1] }}</td>
+                        <td>{{ alert[2] }}</td>
+                        <td>{{ alert[3] }}</td>
+                        <td>₹{{ "%.2f"|format(alert[4]) }}</td>
+                        <td>{{ alert[5] }}</td>
+                        <td><span class="risk-badge risk-{{ alert[6]|lower }}">{{ alert[6] }}</span></td>
+                        <td>{{ alert[7] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8">No fraud alerts detected yet.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Accounts - BankSecure{% endblock %}
+{% block eyebrow %}ACCOUNT MANAGEMENT{% endblock %}
+{% block heading %}Accounts{% endblock %}
+
+{% block content %}
+
+    <!-- Add Account Form -->
+    <section class="form-section">
+
+        <h2>Create New Account</h2>
+
+        <form action="/add-account" method="POST">
+
+            <div class="form-group">
+                <label>Select Customer</label>
+                <select name="customerID" required>
+                    <option value="">-- Select Customer --</option>
+                    {% for customer in customers %}
+                    <option value="{{ customer[0] }}">{{ customer[1] }} {{ customer[2] }} (ID: {{ customer[0] }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Account Number</label>
+                <input type="text" name="account_number" placeholder="Enter account number" required>
+            </div>
+
+            <div class="form-group">
+                <label>Account Type</label>
+                <select name="account_type" required>
+                    <option value="">-- Select Account Type --</option>
+                    <option value="Savings">Savings</option>
+                    <option value="Current">Current</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Initial Balance</label>
+                <input type="number" name="balance" placeholder="Enter initial balance" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Account Status</label>
+                <select name="status" required>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+
+            <button type="submit" class="save-btn">Create Account</button>
+
+        </form>
+
+    </section>
+
+    <!-- Account List -->
+    <section class="transactions">
+
+        <h2>Account List</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Account ID</th>
+                    <th>Customer</th>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if accounts %}
+                    {% for account in accounts %}
+                    <tr>
+                        <td>{{ account[0] }}</td>
+                        <td>{{ account[1] }} {{ account[2] }}</td>
+                        <td>{{ account[3] }}</td>
+                        <td>{{ account[4] }}</td>
+                        <td>₹{{ "%.2f"|format(account[5]) }}</td>
+                        <td>
+                            <span class="status-badge status-{{ account[6]|lower }}">{{ account[6] }}</span>
+                        </td>
+                        <td>
+                            <a href="/edit-account/{{ account[0] }}" class="edit-btn">Edit</a>
+                            <a href="/delete-account/{{ account[0] }}" class="delete-btn"
+                               onclick="return confirm('Are you sure you want to delete this account?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">No accounts available yet.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </section>
+
+{% endblock %}

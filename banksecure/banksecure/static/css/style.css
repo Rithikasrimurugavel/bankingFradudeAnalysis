@@ -1,0 +1,471 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    display: flex;
+    background: #f5f7fb;
+    color: #1e293b;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: #172033;
+    color: white;
+    padding: 30px 20px;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+
+.logo h2 {
+    font-size: 22px;
+}
+
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav-btn {
+    display: block;
+    text-decoration: none;
+    padding: 14px;
+    text-align: left;
+    background: transparent;
+    color: #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: #2563eb;
+    color: white;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-content {
+    flex: 1;
+    padding: 35px 50px;
+    min-width: 0;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+
+.small-text {
+    color: #64748b;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+
+h1 {
+    margin-top: 8px;
+}
+
+
+.admin {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+
+/* =========================
+   STATISTICS CARDS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.card p {
+    color: #64748b;
+}
+
+
+.card h2 {
+    margin-top: 12px;
+}
+
+
+/* =========================
+   CUSTOMER / ACCOUNT FORM
+========================= */
+
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.form-section h2 {
+    margin-bottom: 25px;
+}
+
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+
+/* Input and Select */
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    background: white;
+    outline: none;
+}
+
+
+/* Focus Effect */
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.save-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+
+.save-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   FRAUD ALERT
+========================= */
+
+.fraud-alert {
+    margin-top: 30px;
+    background: #fff3cd;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+
+.fraud-alert p {
+    margin: 12px 0;
+}
+
+
+.analyze-btn {
+    padding: 12px 18px;
+    border: none;
+    background: #e11d48;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+.analyze-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   FLASH MESSAGES
+========================= */
+
+.flash-container {
+    margin-bottom: 25px;
+}
+
+.flash {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.flash-success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.flash-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+
+/* =========================
+   STATUS / RISK BADGES
+========================= */
+
+.status-badge,
+.risk-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status-active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-inactive {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.risk-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.risk-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risk-low {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+
+/* =========================
+   TRANSACTIONS / TABLES
+========================= */
+
+.transactions {
+    margin-top: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.view-all-btn {
+    text-decoration: none;
+    color: white;
+    background: #2563eb;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+th {
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 900px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-content {
+        padding: 30px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        flex-direction: column;
+    }
+
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 20px;
+    }
+
+
+    .logo {
+        margin-bottom: 25px;
+    }
+
+
+    nav {
+        gap: 8px;
+    }
+
+
+    .main-content {
+        padding: 20px;
+    }
+
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-section {
+        padding: 20px;
+    }
+
+
+    .transactions {
+        padding: 15px;
+    }
+
+}
+/* Customer Actions */
+
+.edit-btn {
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.delete-btn {
+    text-decoration: none;
+    background: #dc2626;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    opacity: 0.85;
+}
+/* =========================
+   REPORTS CHART
+========================= */
+
+.chart-container {
+    width: 100%;
+    max-width: 700px;
+    height: 400px;
+    margin: 25px auto;
+}

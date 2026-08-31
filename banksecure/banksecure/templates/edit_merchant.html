@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Merchant - BankSecure{% endblock %}
+{% block eyebrow %}MERCHANT MANAGEMENT{% endblock %}
+{% block heading %}Edit Merchant{% endblock %}
+
+{% block content %}
+
+    <section class="form-section">
+
+        <h2>Update Merchant Details</h2>
+
+        <form action="/update-merchant/{{ merchant[0] }}" method="POST">
+
+            <div class="form-group">
+                <label>Merchant Name</label>
+                <input type="text" name="merchant_name" value="{{ merchant[1] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="category">
+                    {% for cat in ["Shopping", "Food", "Travel", "Entertainment", "Healthcare", "Education", "Other"] %}
+                    <option value="{{ cat }}" {% if merchant[2] == cat %}selected{% endif %}>{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" value="{{ merchant[3] }}">
+            </div>
+
+            <button type="submit" class="save-btn">Update Merchant</button>
+            <a href="/merchants" class="view-all-btn">Cancel</a>
+
+        </form>
+
+    </section>
+
+{% endblock %}

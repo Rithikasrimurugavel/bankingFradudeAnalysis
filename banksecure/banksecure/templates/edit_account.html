@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Account - BankSecure{% endblock %}
+{% block eyebrow %}ACCOUNT MANAGEMENT{% endblock %}
+{% block heading %}Edit Account{% endblock %}
+
+{% block content %}
+
+    <section class="form-section">
+
+        <h2>Update Account Details</h2>
+
+        <form action="/update-account/{{ account[0] }}" method="POST">
+
+            <div class="form-group">
+                <label>Select Customer</label>
+                <select name="customerID" required>
+                    {% for customer in customers %}
+                    <option value="{{ customer[0] }}" {% if customer[0] == account[1] %}selected{% endif %}>
+                        {{ customer[1] }} {{ customer[2] }} (ID: {{ customer[0] }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Account Number</label>
+                <input type="text" name="account_number" value="{{ account[2] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Account Type</label>
+                <select name="account_type" required>
+                    <option value="Savings" {% if account[3] == "Savings" %}selected{% endif %}>Savings</option>
+                    <option value="Current" {% if account[3] == "Current" %}selected{% endif %}>Current</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Balance</label>
+                <input type="number" name="balance" value="{{ account[4] }}" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Account Status</label>
+                <select name="status" required>
+                    <option value="Active" {% if account[5] == "Active" %}selected{% endif %}>Active</option>
+                    <option value="Inactive" {% if account[5] == "Inactive" %}selected{% endif %}>Inactive</option>
+                </select>
+            </div>
+
+            <button type="submit" class="save-btn">Update Account</button>
+            <a href="/accounts" class="view-all-btn">Cancel</a>
+
+        </form>
+
+    </section>
+
+{% endblock %}
